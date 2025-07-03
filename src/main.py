@@ -75,28 +75,23 @@ def analyze_domain_main(domain, args):
             print("❌ Analysis could not be completed!")
             return False
         
-        if args.verbose or args.summary_only:
-            display_summary(result)
+        display_summary(result)
         
-        if not args.summary_only:
-            if args.output:
-                filename = args.output
-            else:
-                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-                safe_domain = domain.replace('.', '_').replace('/', '_')
-                filename = f"seo_analysis_{safe_domain}_{timestamp}.json"
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        safe_domain = domain.replace('.', '_').replace('/', '_')
+        filename = f"seo_analysis_{safe_domain}_{timestamp}.json"
+        
+        try:
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(result, f, indent=2, ensure_ascii=False)
             
-            try:
-                with open(filename, 'w', encoding='utf-8') as f:
-                    json.dump(result, f, indent=2, ensure_ascii=False)
-                
-                Logger.info(f"Analysis saved to file: {filename}")
-                print(f"\n✅ Analysis completed!")
-                print(f"📄 Result file: {filename}")
-            except Exception as e:
-                Logger.error(f"File save error: {str(e)}")
-                print(f"❌ File save error: {str(e)}")
-                return False
+            Logger.info(f"Analysis saved to file: {filename}")
+            print(f"\n✅ Analysis completed!")
+            print(f"📄 Result file: {filename}")
+        except Exception as e:
+            Logger.error(f"File save error: {str(e)}")
+            print(f"❌ File save error: {str(e)}")
+            return False
         
         if result.get('seo_analysis_results', {}).get('overall_seo_score'):
             score = result['seo_analysis_results']['overall_seo_score']
@@ -123,67 +118,17 @@ def analyze_domain_main(domain, args):
     except Exception as e:
         Logger.error(f"Unexpected error: {str(e)}")
         print(f"❌ Unexpected error: {str(e)}")
-        if args.verbose:
-            import traceback
-            traceback.print_exc()
         return False
 
 def create_parser():
     parser = argparse.ArgumentParser(
-        description='Comprehensive SEO Analysis Tool',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog='''
-Usage Examples:
-  python -m src.main example.com
-  python -m src.main -d google.com -o google_seo_analysis.json
-  python -m src.main --domain facebook.com --summary-only
-  python -m src.main -d linkedin.com -s --verbose
-
-.env File Setup:
-  1. Create .env file
-  2. Add OPENROUTER_API_KEY=sk-or-v1-your-api-key
-  3. Optional: Add OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
-  
-Getting API Key:
-  1. Go to https://openrouter.ai
-  2. Create an account
-  3. Get your API key (starts with sk-or-v1-)
-  4. Add to .env file as OPENROUTER_API_KEY
-        '''
+        description='SEO Analysis Tool',
+        add_help=False
     )
     
     parser.add_argument(
         'domain',
-        nargs='?',
         help='Domain to analyze (e.g., example.com)'
-    )
-    
-    parser.add_argument(
-        '-d', '--domain',
-        help='Domain to analyze (alternative method)'
-    )
-    
-    parser.add_argument(
-        '-o', '--output',
-        help='Output file name (default: auto-generate)'
-    )
-    
-    parser.add_argument(
-        '-s', '--summary-only',
-        action='store_true',
-        help='Show summary only, don\'t create JSON file'
-    )
-    
-    parser.add_argument(
-        '-v', '--verbose',
-        action='store_true',
-        help='Show detailed output'
-    )
-    
-    parser.add_argument(
-        '--no-banner',
-        action='store_true',
-        help='Don\'t show startup banner'
     )
     
     return parser
@@ -192,20 +137,15 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
     
-    if not args.no_banner:
-        print("=" * 60)
-        print("🔍 COMPREHENSIVE SEO ANALYSIS TOOL")
-        print("=" * 60)
-        print("📊 Analyze your website's SEO performance in detail")
-        print("🚀 Enhanced analysis powered by OpenRouter AI")
-        print("=" * 60)
+    print("=" * 60)
+    print("🔍 SEO ANALYSIS TOOL")
+    print("=" * 60)
     
-    domain = args.domain or args.domain
+    domain = args.domain
     if not domain:
         Logger.warning("Domain parameter not provided")
         print("❌ Error: Domain parameter required!")
-        print("💡 Usage: python -m src.main example.com")
-        print("📚 Help: python -m src.main --help")
+        print("💡 Usage: python run.py example.com")
         sys.exit(1)
     
     Logger.info(f"Program started, domain: {domain}")
@@ -232,9 +172,6 @@ def main():
     except Exception as e:
         Logger.error(f"Unexpected program error: {str(e)}")
         print(f"\n❌ Unexpected error: {str(e)}")
-        if args.verbose:
-            import traceback
-            traceback.print_exc()
         sys.exit(1)
 
 if __name__ == '__main__':

@@ -29,7 +29,7 @@ class Config:
     
     @classmethod
     def validate_config(cls):
-        if not cls.OPENROUTER_API_KEY:
+        if not cls.OPENROUTER_API_KEY or cls.OPENROUTER_API_KEY == "":
             raise ConfigurationError("OpenRouter API key .env dosyasında OPENROUTER_API_KEY olarak ayarlanmamış!")
         
         if not cls.OPENROUTER_API_KEY.startswith('sk-or-v1-'):

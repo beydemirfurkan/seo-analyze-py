@@ -74,36 +74,16 @@ class SEOAnalyzer:
     @handle_exception
     def extract_structured_data(self, soup):
         Logger.info("Analyzing structured data")
-        structured_data = {
-            'has_schema_org': False,
-            'schema_types': [],
-            'structured_data_errors': []
+        has_json_ld = len(soup.find_all('script', type='application/ld+json')) > 0
+        has_microdata = len(soup.find_all(attrs={'itemtype': True})) > 0
+        has_schema_org = has_json_ld or has_microdata
+        
+        Logger.info(f"Structured data analysis completed: Schema.org present: {has_schema_org}")
+        return {
+            'has_schema_org': has_schema_org,
+            'has_json_ld': has_json_ld,
+            'has_microdata': has_microdata
         }
-        
-        json_ld_scripts = soup.find_all('script', type='application/ld+json')
-        for script in json_ld_scripts:
-            try:
-                data = json.loads(script.string)
-                structured_data['has_schema_org'] = True
-                if isinstance(data, dict) and '@type' in data:
-                    structured_data['schema_types'].append(data['@type'])
-                elif isinstance(data, list):
-                    for item in data:
-                        if isinstance(item, dict) and '@type' in item:
-                            structured_data['schema_types'].append(item['@type'])
-            except json.JSONDecodeError:
-                structured_data['structured_data_errors'].append('Invalid JSON-LD syntax')
-        
-        microdata_items = soup.find_all(attrs={'itemtype': True})
-        for item in microdata_items:
-            structured_data['has_schema_org'] = True
-            itemtype = item.get('itemtype', '')
-            if itemtype:
-                schema_type = itemtype.split('/')[-1]
-                structured_data['schema_types'].append(schema_type)
-        
-        Logger.info(f"Structured data analysis completed: {len(structured_data['schema_types'])} types found")
-        return structured_data
     
     @handle_exception
     def calculate_readability_metrics(self, text):
@@ -138,24 +118,40 @@ class SEOAnalyzer:
             }
     
     @handle_exception
-    def analyze_technical_factors(self, soup):
+    def analyze_technical_factors(self, soup, url=""):
         Logger.info("Analyzing technical SEO factors")
         technical_analysis = {
             'page_speed_factors': {
-                'render_blocking_resources': 0,
                 'inline_styles_count': len(soup.find_all('style')),
                 'inline_scripts_count': len(soup.find_all('script', src=False)),
                 'external_stylesheets': len(soup.find_all('link', rel='stylesheet')),
-                'external_scripts': len(soup.find_all('script', src=True))
+                'external_scripts': len(soup.find_all('script', src=True)),
+                'total_css_files': len(soup.find_all('link', rel='stylesheet')),
+                'total_js_files': len(soup.find_all('script', src=True))
             },
             'mobile_optimization': {
                 'has_viewport_meta': False,
                 'viewport_content': '',
-                'responsive_design_indicators': []
+                'has_media_queries': False,
+                'touch_friendly_elements': 0
             },
-            'security_headers': {
-                'has_https': False,
-                'security_issues': []
+            'security_analysis': {
+                'is_https': url.startswith('https://'),
+                'mixed_content_issues': 0
+            },
+            'content_structure': {
+                'has_forms': len(soup.find_all('form')) > 0,
+                'forms_count': len(soup.find_all('form')),
+                'has_tables': len(soup.find_all('table')) > 0,
+                'tables_count': len(soup.find_all('table')),
+                'lists_count': len(soup.find_all(['ul', 'ol'])),
+                'has_breadcrumbs': False
+            },
+            'seo_technical': {
+                'has_robots_meta': False,
+                'robots_content': '',
+                'has_sitemap_reference': False,
+                'has_hreflang': len(soup.find_all('link', rel='alternate', hreflang=True)) > 0
             },
             'accessibility': {
                 'images_without_alt': 0,
@@ -169,17 +165,38 @@ class SEOAnalyzer:
             technical_analysis['mobile_optimization']['has_viewport_meta'] = True
             technical_analysis['mobile_optimization']['viewport_content'] = viewport_tag.get('content', '')
         
-        if soup.find_all('meta', attrs={'name': 'viewport'}):
-            technical_analysis['mobile_optimization']['responsive_design_indicators'].append('viewport-meta-present')
-        
+        # Media queries kontrolü
         styles = soup.find_all('style')
         for style in styles:
             if style.string and '@media' in style.string:
-                technical_analysis['mobile_optimization']['responsive_design_indicators'].append('css-media-queries')
+                technical_analysis['mobile_optimization']['has_media_queries'] = True
                 break
         
-        images = soup.find_all('img')
-        images_without_alt = sum(1 for img in images if not img.get('alt') or not img.get('alt').strip())
+        # Touch friendly elements (buttons, inputs)
+        touch_elements = soup.find_all(['button', 'input', 'select', 'textarea'])
+        technical_analysis['mobile_optimization']['touch_friendly_elements'] = len(touch_elements)
+        
+        # Robots meta kontrol
+        robots_tag = soup.find('meta', attrs={'name': 'robots'})
+        if robots_tag:
+            technical_analysis['seo_technical']['has_robots_meta'] = True
+            technical_analysis['seo_technical']['robots_content'] = robots_tag.get('content', '')
+        
+        # Sitemap referansı kontrol (head içinde)
+        sitemap_links = soup.find_all('link', type='application/xml')
+        technical_analysis['seo_technical']['has_sitemap_reference'] = len(sitemap_links) > 0
+        
+        # Breadcrumb kontrol (schema.org BreadcrumbList)
+        breadcrumb_scripts = soup.find_all('script', type='application/ld+json')
+        for script in breadcrumb_scripts:
+            try:
+                if script.string and 'BreadcrumbList' in script.string:
+                    technical_analysis['content_structure']['has_breadcrumbs'] = True
+                    break
+            except:
+                pass
+        
+        images_without_alt = sum(1 for img in soup.find_all('img') if not img.get('alt') or not img.get('alt').strip())
         technical_analysis['accessibility']['images_without_alt'] = images_without_alt
         
         h1_count = len(soup.find_all('h1'))
@@ -256,31 +273,34 @@ class SEOAnalyzer:
             'total_headings': sum(heading_counts.values())
         }
         
-        images = []
-        for idx, img in enumerate(soup.find_all('img')):
-            if len(images) >= self.config.MAX_IMAGES:
-                break
-                
-            src = img.get('src', '')
-            if src:
-                src = urljoin(url, src)
+        images_stats = {
+            'total_images': 0,
+            'images_without_alt': 0,
+            'images_without_src': 0,
+            'images_without_dimensions': 0
+        }
+        
+        for img in soup.find_all('img'):
+            images_stats['total_images'] += 1
             
-            images.append({
-                'src': src,
-                'alt': img.get('alt', ''),
-                'title': img.get('title', ''),
-                'has_alt': bool(img.get('alt', '').strip()),
-                'is_decorative': not bool(img.get('alt', '').strip())
-            })
+            if not img.get('alt', '').strip():
+                images_stats['images_without_alt'] += 1
+            
+            if not img.get('src', '').strip():
+                images_stats['images_without_src'] += 1
+            
+            if not img.get('width') or not img.get('height'):
+                images_stats['images_without_dimensions'] += 1
         
-        links = []
-        internal_links_count = 0
-        external_links_count = 0
+        links_stats = {
+            'internal_links': 0,
+            'external_links': 0,
+            'nofollow_links': 0,
+            'links_without_anchor_text': 0,
+            'links_without_title': 0
+        }
         
-        for idx, link in enumerate(soup.find_all('a', href=True)):
-            if len(links) >= self.config.MAX_LINKS:
-                break
-                
+        for link in soup.find_all('a', href=True):
             href = link['href']
             text = link.get_text(strip=True)
             
@@ -289,26 +309,21 @@ class SEOAnalyzer:
                 is_internal = link_domain == domain
             else:
                 is_internal = True
-                href = urljoin(url, href)
             
             if is_internal:
-                internal_links_count += 1
-                link_type = "internal"
+                links_stats['internal_links'] += 1
             else:
-                external_links_count += 1
-                link_type = "external"
+                links_stats['external_links'] += 1
             
             rel_attr = link.get('rel', [])
-            is_follow = 'nofollow' not in rel_attr
+            if 'nofollow' in rel_attr:
+                links_stats['nofollow_links'] += 1
             
-            links.append({
-                'href': href,
-                'text': text[:100],
-                'type': link_type,
-                'is_follow': is_follow,
-                'has_title': bool(link.get('title', '').strip()),
-                'anchor_text_length': len(text)
-            })
+            if not text.strip():
+                links_stats['links_without_anchor_text'] += 1
+            
+            if not link.get('title', '').strip():
+                links_stats['links_without_title'] += 1
         
         content_tags = soup.find_all(['p', 'div', 'article', 'section', 'main'])
         main_text = ' '.join([tag.get_text(strip=True) for tag in content_tags])
@@ -325,7 +340,7 @@ class SEOAnalyzer:
         average_sentence_length = word_count_total / sentence_count if sentence_count > 0 else 0
         
         readability_metrics = self.calculate_readability_metrics(main_text)
-        technical_analysis = self.analyze_technical_factors(soup)
+        technical_analysis = self.analyze_technical_factors(soup, url)
         
         preprocessed_data = {
             "website_info": {
@@ -348,10 +363,8 @@ class SEOAnalyzer:
             "seo_elements_extracted": {
                 "headings": headings,
                 "heading_structure": heading_structure,
-                "images": images,
-                "links": links,
-                "internal_links_count": internal_links_count,
-                "external_links_count": external_links_count,
+                "images_stats": images_stats,
+                "links_stats": links_stats,
                 "main_text_snippet": main_text_snippet,
                 "word_count_total": word_count_total,
                 "paragraph_count": paragraph_count,
@@ -384,24 +397,31 @@ class SEOAnalyzer:
         schema_prompt = json.dumps(get_comprehensive_seo_schema(), indent=2)
         
         prompt = f"""
-Analyze the following website data to perform a comprehensive SEO analysis. Your output must conform to the provided JSON schema.
+You are a professional SEO expert analyzing a website. Based on the provided data, perform a comprehensive SEO audit and scoring.
 
-Data to analyze:
+Website Data:
 {json.dumps(preprocessed_data, indent=2, ensure_ascii=False)}
 
-JSON Schema:
+JSON Schema (you MUST follow this exact structure):
 {schema_prompt}
 
-Focus on the following when analyzing:
-1. Quality and optimization status of SEO elements
-2. Technical SEO issues and opportunities
-3. Content quality and keyword usage
-4. Mobile compatibility and accessibility
-5. Social media optimization
-6. Structured data usage
-7. Competitive advantages and improvement opportunities
+IMPORTANT INSTRUCTIONS:
+1. YOU must determine the overall SEO score (0-100) based on your professional analysis
+2. Score each category independently: Title/Meta, Content Quality, Technical SEO, Mobile, etc.
+3. Provide specific, actionable recommendations based on real issues found
+4. Analyze keyword usage patterns from the content
+5. Evaluate technical factors: page speed, accessibility, mobile optimization
+6. Consider content structure, readability, and user experience
+7. Check for SEO best practices compliance
 
-Provide practical recommendations and explanations in English. Return the result in JSON format only.
+SCORING GUIDELINES:
+- 90-100: Excellent SEO optimization
+- 75-89: Good with minor improvements needed  
+- 60-74: Average, several optimization opportunities
+- 40-59: Poor, major SEO work required
+- 0-39: Critical issues, complete SEO overhaul needed
+
+Be thorough, professional, and base your analysis on the actual data provided. Return only valid JSON that matches the schema exactly.
 """
         
         data = {
@@ -427,7 +447,7 @@ Provide practical recommendations and explanations in English. Return the result
                 )
                 
                 if response.status_code == 429:
-                    delay = self.config.INITIAL_DELAY * (2 ** attempt)
+                    delay = min(self.config.INITIAL_DELAY * (2 ** attempt), 60)
                     Logger.warning(f"Rate limit hit, waiting {delay} seconds")
                     time.sleep(delay)
                     continue
@@ -453,19 +473,20 @@ Provide practical recommendations and explanations in English. Return the result
                 Logger.error(f"API call error (attempt {attempt + 1}): {e}")
                 if attempt == self.config.MAX_RETRIES - 1:
                     ExceptionHandler.handle_api_error("OpenRouter", str(e))
-                time.sleep(self.config.INITIAL_DELAY)
+                time.sleep(min(self.config.INITIAL_DELAY * (attempt + 1), 30))
                 
             except json.JSONDecodeError as e:
                 Logger.error(f"JSON parsing error: {e}")
                 if attempt == self.config.MAX_RETRIES - 1:
                     ExceptionHandler.handle_parsing_error("LLM Response JSON", str(e))
-                time.sleep(self.config.INITIAL_DELAY)
+                time.sleep(min(self.config.INITIAL_DELAY * (attempt + 1), 30))
                 
             except Exception as e:
                 Logger.error(f"Unexpected LLM error: {e}")
                 if attempt == self.config.MAX_RETRIES - 1:
                     ExceptionHandler.handle_api_error("OpenRouter", str(e))
-                time.sleep(self.config.INITIAL_DELAY)
+                time.sleep(min(self.config.INITIAL_DELAY * (attempt + 1), 30))
+    
     
     @handle_exception
     def analyze_domain(self, domain):

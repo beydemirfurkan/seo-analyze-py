@@ -1,0 +1,217 @@
+{
+  "website_info": {
+    "url": "https://discoverwebtools.com",
+    "domain": "discoverwebtools.com",
+    "title": "Discover Web Tools - The Best Web Tools",
+    "title_length": 39,
+    "meta_description": "Discover the best web tools to boost productivity and streamline workflows.",
+    "meta_description_length": 75,
+    "meta_keywords": "web tools, productivity tools, online tools, web development tools, web design tools",
+    "canonical_url": "N/A",
+    "viewport_meta": "width=device-width, initial-scale=1",
+    "lang_attribute": "en",
+    "charset": "utf-8",
+    "robots_meta": "index, follow",
+    "og_tags": {
+      "og_title": "Discover Web Tools - The Best Web Tools",
+      "og_description": "Discover the best web tools of 2024 to boost productivity, streamline workflows, and unlock hidden gems for developers and online businesses.",
+      "og_image": "https://discoverwebtools.com/images/og-image.jpg",
+      "og_url": "https://discoverwebtools.com",
+      "og_type": "website"
+    },
+    "twitter_tags": {
+      "twitter_card": "summary",
+      "twitter_title": "Discover Web Tools - The Best Web Tools",
+      "twitter_description": "Discover the best web tools of 2024 to boost productivity, streamline workflows, and unlock hidden gems for developers and online businesses.",
+      "twitter_image": "https://discoverwebtools.com/images/og-image.jpg"
+    },
+    "structured_data": {
+      "has_schema_org": true,
+      "has_json_ld": true,
+      "has_microdata": false
+    }
+  },
+  "seo_elements_extracted": {
+    "headings": [
+      {
+        "tag": "h1",
+        "text": "DiscoverWeb Tools",
+        "position": 1
+      },
+      {
+        "tag": "h2",
+        "text": "Your Digital Productivity Hub",
+        "position": 1
+      },
+      {
+        "tag": "h2",
+        "text": "Empower Your Development",
+        "position": 2
+      },
+      {
+        "tag": "h2",
+        "text": "What Our Users Say",
+        "position": 3
+      },
+      {
+        "tag": "h2",
+        "text": "Frequently Asked Questions",
+        "position": 4
+      },
+      {
+        "tag": "h2",
+        "text": "We use cookies",
+        "position": 5
+      },
+      {
+        "tag": "h2",
+        "text": "Sign up for our newsletter",
+        "position": 6
+      },
+      {
+        "tag": "h3",
+        "text": "SEO Tools",
+        "position": 1
+      },
+      {
+        "tag": "h3",
+        "text": "Development Tools",
+        "position": 2
+      },
+      {
+        "tag": "h3",
+        "text": "Security and Networking",
+        "position": 3
+      },
+      {
+        "tag": "h3",
+        "text": "Other Tools",
+        "position": 4
+      },
+      {
+        "tag": "h3",
+        "text": "Math and Calculation",
+        "position": 5
+      },
+      {
+        "tag": "h3",
+        "text": "Media Tools",
+        "position": 6
+      },
+      {
+        "tag": "h3",
+        "text": "Writing Tools",
+        "position": 7
+      },
+      {
+        "tag": "h3",
+        "text": "Legal Tools",
+        "position": 8
+      },
+      {
+        "tag": "h3",
+        "text": "Q1How can I access thesefree tools?",
+        "position": 9
+      },
+      {
+        "tag": "h3",
+        "text": "Q2Do I need to install any software to use yourtools?",
+        "position": 10
+      },
+      {
+        "tag": "h3",
+        "text": "Q3Are there any hidden costs associated with yourfree tools?",
+        "position": 11
+      },
+      {
+        "tag": "h3",
+        "text": "Q4How do you ensure the privacy of my data when using yourtools?",
+        "position": 12
+      },
+      {
+        "tag": "h3",
+        "text": "Q5Can I use your tools for commercial purposes?",
+        "position": 13
+      }
+    ],
+    "heading_structure": {
+      "h1_count": 1,
+      "h2_count": 6,
+      "h3_count": 36,
+      "h4_count": 0,
+      "h5_count": 0,
+      "h6_count": 0,
+      "total_headings": 43
+    },
+    "images_stats": {
+      "total_images": 46,
+      "images_without_alt": 0,
+      "images_without_src": 0,
+      "images_without_dimensions": 0
+    },
+    "links_stats": {
+      "internal_links": 104,
+      "external_links": 4,
+      "nofollow_links": 0,
+      "links_without_anchor_text": 0,
+      "links_without_title": 108
+    },
+    "main_text_snippet": "Discover Web ToolsCategoriesCommunity ToolsMenuMenu86+ Free Web ToolsDiscoverWeb ToolsDive into our extensive collection of free, user-friendly tools crafted to streamline your daily tasks, enhance productivity, and boost your digital experiences.Search tools...⌘KExplore Toolsfrom 84+ reviews8ToolsSEO ToolsSEO ToolsWord CounterA simple tool to count words and characters in a text.Try ToolSEO ToolsReading Time EstimatorEstimate the reading time of a text.Try ToolSEO ToolsMeta Tags CheckerCheck meta tags of a web page with this simple tool.Try ToolSEO ToolsCase ConverterConvert text case with this simple tool.Try ToolSEO ToolsRobot.txt GeneratorGenerate Robot.txt files with this simple tool.Try ToolSEO ToolsMeta Tags GeneratorGenerate Meta Tags with this simple tool.Try ToolSEO ToolsSchema Markup GeneratorGenerate structured data markup for rich snippets.Try ToolSEO ToolsSEO ChecklistTrack and improve your SEO with this comprehensive checklist tool.Try Tool27ToolsDevelopment ToolsDevelopment ToolsJavaScript MinifierFormat or minify your JavaScript code with this simple tool.Try ToolDevelopment ToolsHTML to JSX ConverterConvert HTML to JSX and JSX to HTML with this simple tool.Try ToolDevelopment ToolsHTML ViewerView the HTML of a web page.Try ToolDevelopment ToolsRegex TesterTest your regular expressions with this simple tool.Try ToolDevelopment ToolsCSS MinifierMinify your CSS with this simple tool.Try ToolDevelopment ToolsJSON BeautifierBeautify your JSON with this simple tool.Try ToolDevelopment ToolsDecode/Encode URLDecode or encode URLs with this simple tool.Try ToolDevelopment ToolsMarkdown ViewerView and render Markdown content with this simple tool.Try ToolDevelopment ToolsColor PickerPick colors and generate color codes with this simple tool.Try ToolDevelopment ToolsBase64 EncoderEncode text to Base64 with this simple tool.Try ToolDevelopment ToolsUUID GeneratorGenerate UUIDs with this simple tool.Try ToolDevelopment ToolsLink PreviewGet a preview of a web page with this simple tool.Try ToolDevelopment ToolsSCSS/SASS ViewerView and convert SCSS/SASS to CSS with this simple tool.Try ToolDevelopment ToolsBBCode to HTML ConverterConvert BBCode to HTML with this simple tool.Try ToolDevelopment ToolsEscape ToolEscape special characters with this simple tool.Try ToolDevelopment ToolsHTML ValidatorValidate HTML code with this simple tool.Try ToolDevelopment ToolsCSS Layout GeneratorGenerate CSS layouts with this simple tool.Try ToolDevelopment ToolsCSS Shadow GeneratorGenerate CSS shadows with this simple tool.Try ToolDevelopment ToolsHTML to PDF ConverterConvert HTML to PDF with this simple tool.Try ToolDevelopment ToolsHtaccess Redirect GeneratorGenerate .htaccess redirect rules easily.Try ToolDevelopment ToolsLorem Ipsum GeneratorGenerate customizable Lorem Ipsum placeholder text.Try ToolDevelopment ToolsFake Data GeneratorGenerate realistic placeholder data for testing or demos.Try ToolDevelopment ToolsHTML MinifierMinify HTML code with this simple tool.Try ToolDevelopment ToolsTimestamp ConverterConvert timestamps with this simple tool.Try ToolDevelopment ToolsCSV to JSON ConverterConvert CSV files to JSON with this simple tool.Try ToolDevelopment ToolsJSON to CSV ConverterConvert JSON files to CSV with this simple tool.Try ToolDevelopment ToolsAPI TestTest your API with this simple tool.Try Tool15ToolsSecurity and NetworkingSecurity and NetworkingJavaScript ObfuscatorObfuscate your JavaScript code with this simple tool.Try ToolSecurity and NetworkingEmail ValidationValidate email addresses with this simple tool.Try ToolSecurity and NetworkingSMTP CheckerCheck your SMTP server with this simple tool.Try ToolSecurity and NetworkingDNS LookUpLook up DNS records with this simple tool.Try ToolSecurity and NetworkingWhois CheckerCheck the WHOIS information of a domain with this simple tool.Try ToolSecurity and NetworkingSSL CheckerCheck the SSL certificate of a domain with this simple tool.Try ToolSecurity and NetworkingWebSite StatusCheck the status of a website with this simple tool.Try ToolSecurity and NetworkingUser Agent FinderFind information about your user agent with this simple tool.Try ToolSecurity and NetworkingWhat Is My IPFind your public IP address with this simple tool.Try ToolSecurity and NetworkingDecode/Encode JWTDecode or encode JWT tokens with this simple tool.Try ToolSecurity and NetworkingPassword GeneratorGenerate secure passwords with this simple tool.Try ToolSecurity and NetworkingMD5 GeneratorGenerate MD5 hashes with this simple tool.Try ToolSecurity and NetworkingSHA256 GeneratorGenerate SHA 256 hashes with this simple tool.Try ToolSecurity and NetworkingDomain Age CheckerCheck the age of a domain with this simple tool.Try ToolSecurity and NetworkingSQL Injection TestTest your SQL queries with this simple tool.Try Tool8ToolsOther ToolsOther ToolsURL UnshortenUnshorten URLs and find the final destination with this simple tool.Try ToolOther ToolsURL ShortenerShorten URLs with this simple tool.Try ToolOther ToolsQR Code GeneratorGenerate QR codes with this simple tool.Try ToolOther ToolsText To SpeechConvert text to speech with this simple tool.Try ToolOther ToolsYouTube Timestamp Link GeneratorGenerate YouTube timestamp links with this simple tool.Try ToolOther ToolsPayPal Link GeneratorGenerate PayPal payment links with this simple tool.Try ToolOther ToolsCarbon Footprint CalculatorCalculate your carbon footprint with this simple tool.Try ToolOther ToolsCurrency ConverterConvert between different currencies with live exchange rates.Try Tool2ToolsMath and CalculationMath and CalculationPercentage CalculatorCalculate percentages with this simple tool.Try ToolMath and CalculationMortgage CalculatorCalculate mortgage payments with this simple tool.Try Tool18ToolsMedia ToolsMedia ToolsImage To PDFConvert images to PDF with this simple tool.Try ToolMedia ToolsImage ResizerResize images with this simple tool.Try ToolMedia ToolsPNG to JPG ConverterConvert PNG images to JPG with this simple tool.Try ToolMedia ToolsJPG to PNG ConverterConvert JPG images to PNG with this simple tool.Try ToolMedia ToolsJPG to WebP ConverterConvert JPG images to WebP with this simple tool.Try ToolMedia ToolsPNG to WebP ConverterConvert PNG images to WebP with this simple tool.Try ToolMedia ToolsWebP to PNG ConverterConvert WebP images to PNG with this simple tool.Try ToolMedia ToolsWebP to JPG ConverterConvert WebP images to JPG with this simple tool.Try ToolMedia ToolsImage CompressionCompress images with this simple tool.Try ToolMedia ToolsPNG to ICO ConverterConvert PNG images to ICO with this simple tool.Try ToolMedia ToolsJPG to ICO ConverterConvert JPG images to ICO with this simple tool.Try ToolMedia ToolsSVG to PNG ConverterConvert SVG images to PNG with this simple tool.Try ToolMedia ToolsImage to Base64 ConverterConvert images to Base64 with this simple tool.Try ToolMedia ToolsICO to PNG ConverterConvert ICO images to PNG with this simple tool.Try ToolMedia ToolsICO to JPG ConverterConvert ICO images to JPG with this simple tool.Try ToolMedia ToolsICO to WebP ConverterConvert ICO images to WebP with this simple tool.Try ToolMedia ToolsMP3 to MP4 ConverterConvert MP3 files to MP4 with this simple tool.Try ToolMedia ToolsMP4 to MP3 ConverterConvert MP4 files to MP3 with this simple tool.Try Tool2ToolsWriting ToolsWriting ToolsGrammar CheckerCheck your grammar with this simple tool.Try ToolWriting ToolsText SummarizerSummarize text with this simple tool.Try Tool6ToolsLegal ToolsLegal ToolsPrivacy Policy GeneratorGenerate a privacy policy with this simple tool.Try ToolLegal ToolsTerms and Conditions GeneratorEasily generate customized Terms & Conditions for your website or application.Try ToolLegal ToolsCookies Policy GeneratorCreate a comprehensive Cookies Policy tailored to your website or service.Try ToolLegal ToolsReturn & Refund Policy GeneratorCreate a professional and clear return & refund policy for your online store.Try ToolLegal ToolsEUL",
+    "word_count_total": 29907,
+    "paragraph_count": 21,
+    "sentence_count": 2261,
+    "average_sentence_length": 13.23,
+    "readability_metrics": {
+      "flesch_reading_ease": 17.35,
+      "avg_words_per_sentence": 12.17,
+      "complex_words_percentage": 27.17
+    }
+  },
+  "technical_seo_analysis": {
+    "page_speed_factors": {
+      "render_blocking_resources": 0,
+      "inline_styles_count": 0,
+      "inline_scripts_count": 100,
+      "external_stylesheets": 2,
+      "external_scripts": 24
+    },
+    "mobile_optimization": {
+      "has_viewport_meta": true,
+      "viewport_content": "width=device-width, initial-scale=1",
+      "responsive_design_indicators": [
+        "viewport-meta-present"
+      ]
+    },
+    "security_headers": {
+      "has_https": false,
+      "security_issues": []
+    },
+    "accessibility": {
+      "images_without_alt": 0,
+      "headings_structure_issues": [],
+      "accessibility_score": 100
+    }
+  },
+  "seo_analysis_results": {
+    "overall_seo_score": 75,
+    "overall_content_quality_relevance": "Score: 75/100",
+    "heading_structure_analysis": "H1: 1, H2: 6, H3: 36",
+    "image_optimization_analysis": "Total: 46, Missing alt: 0, Missing dimensions: 0",
+    "linking_analysis": "Internal: 104, External: 4, NoFollow: 0",
+    "readability_analysis": "Flesch Score: 17.35, Words: 29907",
+    "technical_seo_notes": "Accessibility Score: 100/100",
+    "keyword_analysis": {
+      "primary_keywords": [
+        "N/A - API required for keyword analysis"
+      ],
+      "secondary_keywords": [
+        "N/A - API required for keyword analysis"
+      ],
+      "keyword_usage_comment": "Advanced keyword analysis requires API access"
+    },
+    "actionable_recommendations": [
+      "Meta description is too short (< 120 characters)",
+      "Content is difficult to read (improve readability)"
+    ]
+  }
+}

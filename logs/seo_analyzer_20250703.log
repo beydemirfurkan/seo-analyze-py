@@ -1,2 +1,33 @@
-2025-07-03 13:30:13,910 - seo_analyzer - INFO - API server starting: 127.0.0.1:5000
-2025-07-03 13:30:15,237 - seo_analyzer - INFO - API server starting: 127.0.0.1:5000
+2025-07-03 23:16:57,978 - seo_analyzer - INFO - Program started, domain: discoverwebtools.com
+2025-07-03 23:16:57,978 - seo_analyzer - INFO - Validating configuration
+2025-07-03 23:16:57,978 - seo_analyzer - INFO - Configuration validated successfully
+2025-07-03 23:16:57,979 - seo_analyzer - INFO - Starting domain analysis: discoverwebtools.com
+2025-07-03 23:16:57,979 - seo_analyzer - INFO - SEOAnalyzer initialized
+2025-07-03 23:16:57,979 - seo_analyzer - INFO - Starting domain analysis: discoverwebtools.com
+2025-07-03 23:16:57,979 - seo_analyzer - INFO - Normalizing URL: discoverwebtools.com
+2025-07-03 23:16:58,309 - seo_analyzer - INFO - HTTPS connection successful: https://discoverwebtools.com
+2025-07-03 23:16:58,309 - seo_analyzer - INFO - Fetching page content: https://discoverwebtools.com
+2025-07-03 23:16:58,497 - seo_analyzer - INFO - Page successfully fetched, size: 651756 characters
+2025-07-03 23:16:58,567 - seo_analyzer - INFO - Preparing HTML data for LLM analysis
+2025-07-03 23:16:58,568 - seo_analyzer - INFO - Extracting social media tags
+2025-07-03 23:16:58,568 - seo_analyzer - INFO - Social media tags extracted: OG=5, Twitter=4
+2025-07-03 23:16:58,568 - seo_analyzer - INFO - Analyzing structured data
+2025-07-03 23:16:58,572 - seo_analyzer - INFO - Structured data analysis completed: Schema.org present: True
+2025-07-03 23:16:58,821 - seo_analyzer - INFO - Readability metrics calculated: Flesch=17.35
+2025-07-03 23:16:58,821 - seo_analyzer - INFO - Analyzing technical SEO factors
+2025-07-03 23:16:58,826 - seo_analyzer - INFO - Technical analysis completed: Accessibility score 100
+2025-07-03 23:16:58,826 - seo_analyzer - INFO - HTML preprocessing completed: 29907 words, 20 headings
+2025-07-03 23:16:58,826 - seo_analyzer - INFO - Starting LLM SEO analysis
+2025-07-03 23:16:58,826 - seo_analyzer - INFO - LLM API call attempt 1
+2025-07-03 23:18:02,131 - seo_analyzer - ERROR - JSON parsing error: Unterminated string starting at: line 154 column 5 (char 12122)
+2025-07-03 23:18:03,137 - seo_analyzer - INFO - LLM API call attempt 2
+2025-07-03 23:18:33,014 - seo_analyzer - ERROR - JSON parsing error: Expecting value: line 67 column 7 (char 3264)
+2025-07-03 23:18:33,016 - seo_analyzer - WARNING - JSON parsing failed, falling back to basic analysis
+2025-07-03 23:18:33,017 - seo_analyzer - INFO - Domain analysis completed: discoverwebtools.com
+2025-07-03 23:18:33,021 - seo_analyzer - INFO - Analysis saved to file: seo_analysis_discoverwebtools_com_20250703_231833.json
+2025-07-03 23:18:33,021 - seo_analyzer - INFO - Domain analysis completed successfully: discoverwebtools.com
+2025-07-03 23:18:33,022 - seo_analyzer - INFO - Program completed successfully
+2025-07-03 23:23:48,235 - seo_analyzer - INFO - Program started, domain: discoverwebtools.com
+2025-07-03 23:23:48,236 - seo_analyzer - INFO - Validating configuration
+2025-07-03 23:23:48,236 - seo_analyzer - ERROR - SEOAnalyzerError: Configuration Error: OpenRouter API key .env dosyasında OPENROUTER_API_KEY olarak ayarlanmamış!
+2025-07-03 23:23:48,236 - seo_analyzer - ERROR - Configuration error: Configuration Error: OpenRouter API key .env dosyasında OPENROUTER_API_KEY olarak ayarlanmamış!
